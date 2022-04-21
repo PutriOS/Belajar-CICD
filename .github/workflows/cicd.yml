@@ -7,12 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run a one-line script
-        run: echo Hello, world!
-      - name: Run a multi-line script
-        run: |
-          echo Hello, world! Multiline.
-          echo Hello, world! Multiline again.
+      - name: apt install JQ
+        run: sudo apt install -y jq
+      - name: Run Get Find Pet By Status
+        run: curl https://petstore.swagger.io/v2/pet/findByStatus?status=available >> output.json
+
   lint:
     runs-on: ubuntu-latest
     steps:
