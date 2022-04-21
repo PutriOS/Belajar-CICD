@@ -17,7 +17,7 @@ jobs:
         run: curl https://petstore.swagger.io/v2/pet/9223372000001107000 >> output1.json
       - name: Run extract JSON find pet by id
         run: |
-          id=${jq '.id' output.json}
+          id=${jq '.id' output1.json}
           if [[$id -eq 1]] 
           then 
             echo ok 
