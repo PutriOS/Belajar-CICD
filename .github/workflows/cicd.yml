@@ -11,6 +11,8 @@ jobs:
         run: sudo apt install -y jq
       - name: Run Get Find Pet By Status
         run: curl https://petstore.swagger.io/v2/pet/findByStatus?status=available >> output.json
+      - name: Run extract JSON
+        run: jq '.' output.json
 
   lint:
     runs-on: ubuntu-latest
