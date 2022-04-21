@@ -13,15 +13,15 @@ jobs:
         run: curl https://petstore.swagger.io/v2/pet/findByStatus?status=available >> output.json
       - name: Run extract JSON find pet bu status
         run: jq '.' output.json
-      - name: Run Get Find Pet By id
-        run: curl https://petstore.swagger.io/v2/pet/9223372000001107000 >> output1.json
-      - name: Run extract JSON find pet by id
+      - name: Run Find Pet By id
+        run: curl https://petstore.swagger.io/v2/pet/9223372000001107000 >> outputt.json
+      - name: Run extract JSON
         run: |
-          id=${jq '.id' output1.json}
-          if [[$id -eq 1]] 
-          then 
-            echo ok 
-          else 
+          id=$(jq '.id' outputt.json)
+          if [[ $id -eq 1 ]]
+          then
+            echo ok
+          else
             echo fail
           fi
 
