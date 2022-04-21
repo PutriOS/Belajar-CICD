@@ -11,8 +11,19 @@ jobs:
         run: sudo apt install -y jq
       - name: Run Get Find Pet By Status
         run: curl https://petstore.swagger.io/v2/pet/findByStatus?status=available >> output.json
-      - name: Run extract JSON
+      - name: Run extract JSON find pet bu status
         run: jq '.' output.json
+      - name: Run Get Find Pet By id
+        run: curl https://petstore.swagger.io/v2/pet/9223372000001107000 >> output1.json
+      - name: Run extract JSON find pet by id
+        run: |
+          id=${jq '.id' output.json}
+          if [[$id -eq 1]] 
+          then 
+            echo ok 
+          else 
+            echo fail
+          fi
 
   lint:
     runs-on: ubuntu-latest
