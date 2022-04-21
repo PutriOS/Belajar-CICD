@@ -18,7 +18,7 @@ jobs:
       - name: Run extract JSON
         run: |
           id=$(jq '.id' outputt.json)
-          if [[ $id -eq 1 ]]
+          if [[ $id -eq 9223372000001107000 ]]
           then
             echo ok
           else
