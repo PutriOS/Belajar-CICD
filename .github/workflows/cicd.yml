@@ -3,38 +3,47 @@ on:
   push:
     branches: [ main ]
 jobs:
-  test:
+  report:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: apt install JQ
-        run: sudo apt install -y jq
-      - name: Run Get Find Pet By Status
-        run: curl https://petstore.swagger.io/v2/pet/findByStatus?status=available >> output.json
-      - name: Run extract JSON find pet bu status
-        run: jq '.' output.json
-      - name: Run Find Pet By id
-        run: curl https://petstore.swagger.io/v2/pet/9223372000001107000 >> outputt.json
-      - name: Run extract JSON
-        run: |
-          id=$(jq '.id' outputt.json)
-          if [[ $id -eq 9223372000001107000 ]]
-          then
-            echo ok
-          else
-            echo fail
-          fi
+    - uses: actions/checkout@v3
+    - name: Run JMeter Tests
+      uses: rbhadti94/apache-jmeter-action@v0.5.0
+      with:
+        testFilePath: BelajarCICD.jmx
+        outputReportsFolder: reports/
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: apt install JQ
+  #       run: sudo apt install -y jq
+  #     - name: Run Get Find Pet By Status
+  #       run: curl https://petstore.swagger.io/v2/pet/findByStatus?status=available >> output.json
+  #     - name: Run extract JSON find pet bu status
+  #       run: jq '.' output.json
+  #     - name: Run Find Pet By id
+  #       run: curl https://petstore.swagger.io/v2/pet/9223372000001107000 >> outputt.json
+  #     - name: Run extract JSON
+  #       run: |
+  #         id=$(jq '.id' outputt.json)
+  #         if [[ $id -eq 9223372000001107000 ]]
+  #         then
+  #           echo ok
+  #         else
+  #           echo fail
+  #         fi
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run a one-line script
-        run: echo Hello, world!
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Run a one-line script
+  #       run: echo Hello, world!
       
-  static:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run a one-line script
-        run: echo Hello, world!
+  # static:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Run a one-line script
+  #       run: echo Hello, world!
